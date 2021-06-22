@@ -4,5 +4,5 @@ RUN npm install -g http-server
 
 COPY . /src
 RUN cd /src && npm install
-EXPOSE 80
+EXPOSE 8080
 CMD [ "http-server", "dist" ]
