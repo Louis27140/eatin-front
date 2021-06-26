@@ -4,8 +4,11 @@ import './registerServiceWorker'
 import router from './router'
 import store from './store'
 import vuetify from './plugins/vuetify'
+import helpers from '@/helpers'
 
 Vue.config.productionTip = false
+
+Vue.use(helpers)
 
 new Vue({
   router,

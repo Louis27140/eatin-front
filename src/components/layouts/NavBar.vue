@@ -2,20 +2,13 @@
     <v-app-bar
         app
         color="white"
-        dark
     >
-        <v-avatar
-        :color="$vuetify.breakpoint.smAndDown ? 'grey darken-1' : 'transparent'"
-        size="32"
-        ></v-avatar>
 
-        <router-link to="/">
-            <v-img
-                name="app-logo"
-                :src="img"
-                width="100"
-                contain
-        />
+        <router-link to="/" class="text-decoration-none">
+            <v-app-bar-title class="text-uppercase grey--text text-h4">
+                <span class="font-weight-light black--text">Eat</span>
+                <span class="success--text" >in</span>
+            </v-app-bar-title>
         </router-link>
 
         <v-btn 
