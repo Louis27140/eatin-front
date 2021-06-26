@@ -18,7 +18,7 @@
         to="/login"
         absolute
         right
-        v-if="false"
+        v-if="true"
         >
         se connecter
         </v-btn>
@@ -26,7 +26,7 @@
         <v-menu
         min-width="200"
         offset-y
-        v-if="true"
+        v-if="false"
         >
             <template v-slot:activator="{ on }">
                 
