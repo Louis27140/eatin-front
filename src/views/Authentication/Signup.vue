@@ -29,7 +29,7 @@
               <v-form-base
                 :model="infos"
                 :schema="authSchema"
-                @input="validate()"
+                @input="log"
                 @click="log"
               />
               <v-btn
@@ -114,7 +114,8 @@ import vFormBase from 'vuetify-form-base'
             formHelpers.mandatory,
             (v) => this.infos.password == this.infos.passwordConfirmation || 'Les mots de passe sont différents',
         ], col:12,
-        prependIcon: 'mdi-lock'
+        prependIcon: 'mdi-lock',
+        appendIcon: 'mdi-eye'
         }
         },
         profileSchema: {
@@ -180,11 +181,12 @@ import vFormBase from 'vuetify-form-base'
       log(val) {
             let { on, key, obj, params } = val
 
-            if (on === 'click' && key === 'password' && (params && params.tag) === 'append') { 
+            if (on === 'click' && (key === 'password' || key == 'passwordConfirmation') && (params && params.tag) === 'append') { 
                 // toggle visibility of password control
                 obj.schema.type === 'password' ? obj.schema.appendIcon = 'mdi-eye-off' : obj.schema.appendIcon = 'mdi-eye'
                 obj.schema.type = obj.schema.type === 'password' ? 'text' : 'password'
             }
+            this.validateAuth()
         }
     }
   })
