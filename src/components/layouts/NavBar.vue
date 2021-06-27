@@ -18,7 +18,7 @@
         to="/login"
         absolute
         right
-        v-if="true"
+        v-if="!isLoggedIn"
         >
         se connecter
         </v-btn>
@@ -26,10 +26,9 @@
         <v-menu
         min-width="200"
         offset-y
-        v-if="false"
+        v-if="isLoggedIn"
         >
             <template v-slot:activator="{ on }">
-                
                 <v-btn
                     icon
                     x-large
@@ -41,7 +40,7 @@
                     color="brown"
                     size="40"
                     >
-                    <span class="white--text text-h5">LC</span>
+                    <span class="white--text text-h5">{{ initials }}</span>
                 </v-avatar>
             </v-btn>
         </template>
@@ -70,6 +69,7 @@
                         depressed
                         rounded
                         text
+                        @click="logout"
                     >
                         Déconnexion
                     </v-btn>
@@ -81,14 +81,24 @@
     </v-app-bar>
 </template>
 
-<script>
-import { Component, Prop, Vue } from 'vue-property-decorator';
+<script lang="ts">
+import { Component, Emit, Prop, Vue } from 'vue-property-decorator';
+import { mapActions } from 'vuex';
 @Component
 export default class NavBar extends Vue {
+    @Prop() isLoggedIn: boolean|undefined
+    @Prop() initials: string|undefined
+
     data() {
         return {
-            img: require('@/assets/app-logo.png')
+            //
         }
+    }
+
+    @Emit()
+    logout() {
+        this.$store.dispatch('logout')
+        this.$router.push('/login')
     }
 
 }

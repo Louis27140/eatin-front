@@ -1,5 +1,5 @@
 <template>
-  <v-container fill-height>
+  <v-container fill-height fluid>
     <v-row
     justify="center"
     >
@@ -36,6 +36,7 @@
               :disabled="!authValid"
               color="primary"
               @click="validateAuth(2)"
+              rounded
               >
               Suivant
             </v-btn>
@@ -52,15 +53,18 @@
             class="white--text"
             color="grey"
             @click="step = 1"
+            rounded
             >
             Précédent
             </v-btn>
             <v-btn
-            :disabled="!profileValid"
+            :loading="loader"
+            :disabled="!profileValid || loader"
             color="success"
             @click="validateProfile()"
             right
             absolute
+            rounded
             >
             Terminer
             </v-btn>
@@ -84,18 +88,20 @@ import vFormBase from 'vuetify-form-base'
         step: 1,
         authValid: true,
         profileValid: true,
+        loader: false,
         authSchema: {
-          type: {
+          role: {
             Label: 'Type de profile',
             type: 'select',
             itemText:'name',
             itemValue:'value',
             items: [
-              {name:'Client', value:'customer'},
-              {name:'Livreur', value:'deliver'},
-              {name:'Restaurateur', value:'restaurant'}
+              {name:'Client', value:'USR'},
+              {name:'Livreur', value:'DEL'},
+              {name:'Restaurateur', value:'RES'}
             ],
-            prependIcon:'mdi-account'
+            prependIcon:'mdi-account',
+            col:12
           },  
           email: { type: 'email', label: 'Email', rules: [
             formHelpers.mandatory,
@@ -155,11 +161,11 @@ import vFormBase from 'vuetify-form-base'
             formHelpers.regexZipCode
           ], col:4,
           },
-          sponsor:{type:'text', label:'Code de parainage'},
+          sponsor:{type:'text', label:'Code de parainage',col:12 },
         },
 
         infos: {
-          type:'customer'
+          role:'USR'
         }
       }
     },
@@ -176,7 +182,20 @@ import vFormBase from 'vuetify-form-base'
         }
       },
       signup() {
-        console.log("pizza")
+        delete this.infos['passwordConfirmation']
+        console.log(this.infos)
+        this.$store.dispatch('signup', {infos:this.infos})
+        .then(() => this.loader = true)
+        .finally(() => {
+            this.loader = false
+            this.$store.dispatch('profile')
+            switch(this.$store.getters.getInfos.role) {
+                case 'DEL': this.$router.push('/dev'); break;
+                case 'USR': this.$router.push('/'); break;
+                case 'RES': this.$router.push('/restaurant'); break;
+                default: break;
+            }
+        })
       },
       log(val) {
             let { on, key, obj, params } = val

@@ -1,6 +1,6 @@
 <template>
   <v-app>
-    <navbar></navbar>
+    <navbar :isLoggedIn="isloggedIn" :initials="initials"></navbar>
     <v-main>
       <router-view/>
     </v-main>
@@ -29,6 +29,14 @@ export default Vue.extend({
   components: {
     'navbar': NavBar,
     'foot': Footer
+  },
+  computed: {
+    isloggedIn() {
+      return this.$store.getters.isLoggedIn
+    },
+    initials() {
+      return this.$store.getters.getInitials
+    }
   }
 });
 </script>

@@ -21,10 +21,13 @@
         @click="log"
         />
         <v-btn
-        :disabled="!valid"
+        :loading="loader"
+        :disabled="!valid || loader"
         color="success"
         class="mr-4 mb-3"
         @click="validate"
+        width="100%"
+        rounded
         >
         Connexion
         </v-btn>
@@ -56,6 +59,7 @@ export default Vue.extend({
     data() {
         return {
             valid: true,
+            loader:false,
             model: {
                 email: "",
                 password: "",
@@ -80,7 +84,18 @@ export default Vue.extend({
     name: 'Home',
     methods: {
         validate() {
-            this.$refs.loginForm.validate()
+            if (this.$refs.loginForm.validate()) this.$store.dispatch('login', {credentials: this.model})
+            .then(() => this.loader = true)
+            .finally(() => {
+                this.loader = false
+                this.$store.dispatch('profile')
+                switch(this.$store.getters.getInfos.role) {
+                    case 'DEV': this.$router.push('/dev'); break;
+                    case 'USR': this.$router.push('/'); break;
+                    case 'RES': this.$router.push('/restaurant'); break;
+                    default: break;
+                }
+            })
         },
         log(val) {
             let { on, key, obj, params } = val
@@ -91,6 +106,9 @@ export default Vue.extend({
                 obj.schema.type = obj.schema.type === 'password' ? 'text' : 'password'
             }
         }
+    },
+    computed: {
+
     }
 })
 </script>
