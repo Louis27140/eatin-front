@@ -185,7 +185,7 @@ import vFormBase from 'vuetify-form-base'
         delete this.infos['passwordConfirmation']
         console.log(this.infos)
         this.$store.dispatch('signup', {infos:this.infos})
-        .then(() => this.loader = true)
+        .then(() => this.loader = true).catch(err =>{ this.$store.dispatch('setAlert', {alert:err.response.data.details.message})})
         .finally(() => {
             this.loader = false
             this.$store.dispatch('profile')

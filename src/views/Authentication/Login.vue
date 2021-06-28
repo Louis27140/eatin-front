@@ -60,6 +60,7 @@ export default Vue.extend({
         return {
             valid: true,
             loader:false,
+            error: '',
             model: {
                 email: "",
                 password: "",
@@ -85,7 +86,7 @@ export default Vue.extend({
     methods: {
         validate() {
             if (this.$refs.loginForm.validate()) this.$store.dispatch('login', {credentials: this.model})
-            .then(() => this.loader = true)
+            .then(() => this.loader = true).catch(err =>{ this.$store.dispatch('setAlert', {alert:err.response.data.details.message})})
             .finally(() => {
                 this.loader = false
                 this.$store.dispatch('profile')

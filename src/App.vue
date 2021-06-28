@@ -2,6 +2,7 @@
   <v-app>
     <navbar :isLoggedIn="isloggedIn" :initials="initials"></navbar>
     <v-main>
+      <alert :error="msg"></alert>
       <router-view/>
     </v-main>
     <foot :buttons="buttons"></foot>
@@ -10,6 +11,7 @@
 
 <script lang="ts">
 import Vue from 'vue';
+import Alert from './components/layouts/Alert.vue';
 import Footer from './components/layouts/Footer.vue';
 import NavBar from './components/layouts/NavBar.vue';
 
@@ -28,7 +30,8 @@ export default Vue.extend({
   }),
   components: {
     'navbar': NavBar,
-    'foot': Footer
+    'foot': Footer,
+    'alert': Alert
   },
   computed: {
     isloggedIn() {
@@ -36,7 +39,10 @@ export default Vue.extend({
     },
     initials() {
       return this.$store.getters.getInitials
-    }
+    },
+    msg() {
+      return this.$store.getters.getMsg
+    },
   }
 });
 </script>
