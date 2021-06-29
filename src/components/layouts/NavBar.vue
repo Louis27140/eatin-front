@@ -10,7 +10,7 @@
                 <span class="success--text" >in</span>
             </v-app-bar-title>
         </router-link>
-
+        <v-spacer/>
         <v-btn 
         class="black--text"
         color="white"
@@ -22,7 +22,6 @@
         >
         se connecter
         </v-btn>
-
         <v-menu
         min-width="200"
         offset-y
@@ -33,8 +32,6 @@
                     icon
                     x-large
                     v-on="on"
-                    absolute
-                    right
                 >
                     <v-avatar
                     color="brown"

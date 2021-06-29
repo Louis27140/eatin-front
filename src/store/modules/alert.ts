@@ -6,7 +6,7 @@ const getDefaultState = () => {
   }
 }
 
-const userModule: Module<any, any> = {
+const alertModule: Module<any, any> = {
   state:getDefaultState(),
   getters:{
     getMsg: state => {
@@ -31,4 +31,4 @@ const userModule: Module<any, any> = {
   }
 }
 
-export default userModule;
+export default alertModule;

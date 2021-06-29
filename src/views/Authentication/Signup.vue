@@ -188,7 +188,6 @@ import vFormBase from 'vuetify-form-base'
         .then(() => this.loader = true).catch(err =>{ this.$store.dispatch('setAlert', {alert:err.response.data.details.message})})
         .finally(() => {
             this.loader = false
-            this.$store.dispatch('profile')
             switch(this.$store.getters.getInfos.role) {
                 case 'DEL': this.$router.push('/dev'); break;
                 case 'USR': this.$router.push('/'); break;

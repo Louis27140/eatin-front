@@ -7,12 +7,13 @@ import Vuetify, {
     VCheckbox,
     VSelect,
     VRadio,
-    VRadioGroup
+    VRadioGroup,
+    VBtn
 } from 'vuetify/lib';
 import { Ripple, Intersect, Touch, Resize } from 'vuetify/lib/directives';
 
 Vue.use(Vuetify, {
-    components: { VRow, VTooltip, VCol, VTextField, VCheckbox, VSelect, VRadio, VRadioGroup},
+    components: { VRow, VTooltip, VCol, VTextField, VCheckbox, VSelect, VRadio, VRadioGroup,VBtn},
     directives: { Ripple, Intersect, Touch, Resize },
 });
 

@@ -10,7 +10,7 @@ const getDefaultState = () => {
   }
 }
 
-const userModule: Module<any, any> = {
+const authModule: Module<any, any> = {
   state:getDefaultState(),
   getters:{
     isLoggedIn: state => {
@@ -72,4 +72,4 @@ const userModule: Module<any, any> = {
   }
 }
 
-export default userModule;
+export default authModule;

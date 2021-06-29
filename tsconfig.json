@@ -11,6 +11,7 @@
     "esModuleInterop": true,
     "allowSyntheticDefaultImports": true,
     "sourceMap": true,
+    "noImplicitAny": true,
     "allowJs": true,
     "baseUrl": ".",
     "types": [
@@ -34,7 +35,7 @@
     "src/**/*.vue",
     "tests/**/*.ts",
     "tests/**/*.tsx"
-, "src/helpers/index.js", "src/helpers/formHelpers.js"  ],
+, "src/helpers/index.js", "src/helpers/formHelpers.js", "src/firebase-messaging-sw.js"  ],
   "exclude": [
     "node_modules"
   ]

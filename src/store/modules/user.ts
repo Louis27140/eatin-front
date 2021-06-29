@@ -3,8 +3,8 @@ import AuthService from '@/services/AuthService'
  
 const getDefaultState = () => {
   return {
-    user: {}
-
+    user: {},
+    cart: []
   }
 }
 
@@ -16,13 +16,23 @@ const userModule: Module<any, any> = {
       if (fullname != undefined) return fullname.firstName[0]+fullname.lastName[0]
       return ''
     },
-    getFullName: state => {
-        return state.fullName.firstName
+    getUser: state => {
+      return state.user
+    },
+    getCart: state => {
+        return state.cart
     },
   },
   mutations: {
     SET_USER: (state, user) => {
       state.user = user;
+    },
+    ADD_TO_CART: (state, item) => {
+      state.cart.push(item)
+    },
+    REMOVE_FROM_CART: (state, item) => {
+      const index = state.cart.indexOf(item)
+      delete state.cart[index]
     },
     RESET: state => {
       Object.assign(state, getDefaultState());
@@ -35,6 +45,12 @@ const userModule: Module<any, any> = {
     },
     logout: ({ commit, dispatch }) => {
       commit('RESET', '');
+    },
+    addToCart: ({commit}, {item}) => {
+      commit('ADD_TO_CART', item)
+    },
+    removeToCart: ({commit}, {item}) => {
+      commit('REMOVE_FROM_CART', item)
     }
   }
 }
