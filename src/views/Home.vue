@@ -13,7 +13,7 @@
 </template>
 
 <script lang="ts">
-  import AuthService from '@/services/AuthService'
+  //import AuthService from '@/services/AuthService'
 import Vue from 'vue'
   import Restaurant from '../components/Restaurant.vue'
 

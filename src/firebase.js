@@ -1,4 +1,4 @@
-import firebase from 'firebase/app'
+/*import firebase from 'firebase/app'
 import 'firebase/firebase-messaging'
 
 var firebaseConfig = {
@@ -13,5 +13,5 @@ var firebaseConfig = {
 
 firebase.initializeApp(firebaseConfig)
 
-export default firebase.messaging()
+export default firebase.messaging()*/
 
