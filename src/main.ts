@@ -5,14 +5,14 @@ import router from './router'
 import store from './store'
 import vuetify from './plugins/vuetify'
 import helpers from '@/helpers'
-import firebaseMessaging from './firebase'
+//import firebaseMessaging from './firebase'
 
 Vue.config.productionTip = false
 
 Vue.use(helpers)
 
 
-Vue.prototype.$messaging = firebaseMessaging
+//Vue.prototype.$messaging = firebaseMessaging
 
 new Vue({
   router,
