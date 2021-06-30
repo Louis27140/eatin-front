@@ -35,7 +35,7 @@
     "src/**/*.vue",
     "tests/**/*.ts",
     "tests/**/*.tsx"
-, "src/helpers/index.js", "src/helpers/formHelpers.js", "src/firebase-messaging-sw.js"  ],
+, "src/helpers/index.js", "src/helpers/formHelpers.js", "public/firebase-messaging-sw.js"  ],
   "exclude": [
     "node_modules"
   ]

@@ -46,7 +46,7 @@ export default class Restaurant extends Vue {
     @Emit()
     accessRestaurant() {
         this.$store.dispatch('setRestaurant', {id:this.id})
-        this.$router.push('/restaurant/' + this.name)
+        this.$router.push('/restaurant/' + this.id)
     }
 
     get img() {

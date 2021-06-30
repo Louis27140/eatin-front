@@ -1,7 +1,7 @@
 <template>
     <v-hover>
         <template  v-slot:default="{ hover}">
-            <v-card tile elevation="24">
+            <v-card tile elevation="12">
                 <v-img
                 height="100"
                 :src="img"
@@ -19,7 +19,7 @@
                         absolute
                         color="#036358"
                     >
-                <v-btn @click="accessRestaurant()">Afficher</v-btn>
+                <v-btn @click="addArticleToCart(id)">Ajouter au panier</v-btn>
                 </v-overlay>
     </v-fade-transition>
             </v-card>
@@ -44,9 +44,12 @@ export default class Article extends Vue {
     }
 
     @Emit()
-    accessRestaurant() {
-        this.$store.dispatch('setRestaurant', {id:this.id})
-        this.$router.push('/restaurant/' + this.name)
+    addArticleToCart(id: any) {
+        let item = this.$store.getters.getArticles.find((e:any) => e._id == id)
+        if (this.$store.getters.getCart.find(e => e.restaurantId == item.restaurantId) || this.$store.getters.getCart[0] === undefined) {
+            console.log(!!this.$store.getters.getCart.find(e => e.restaurantId == item.restaurantId) || this.$store.getters.getCart[0] === undefined)
+            this.$store.dispatch('addToCart', {item:item})
+        }
     }
 
     get img() {

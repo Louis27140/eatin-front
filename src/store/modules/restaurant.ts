@@ -47,7 +47,7 @@ const restaurantModule: Module<any, any> = {
       state.categories = categories
     },
     SET_RESTAURANT: (state, id) => {
-        state.currentRestaurant = state.restaurants.filter((e:any) => (e._id === id))[0];
+        state.currentRestaurant = state.restaurants.find((e:any) => (e._id === id));
       },
       RESET_RESTAURANT: (state) => {
         state.currentRestaurant = {}

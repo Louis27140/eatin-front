@@ -8,6 +8,7 @@ import Home from '../views/Home.vue'
 import Login from '../views/Authentication/Login.vue'
 import Signup from '../views/Authentication/Signup.vue'
 import Profile from '../views/Authentication/Profile.vue'
+import Cart from '../views/Checkout.vue'
 
 import RestaurantPage from '../components/routes/RestaurantPage.vue'
 
@@ -55,6 +56,14 @@ const routes: Array<RouteConfig> = [
     path: '/orders',
     name: 'Orders',
     redirect: '/',
+    meta: {
+      requiresAuth:true
+    }
+  },
+  {
+    path: '/cart',
+    name: 'Cart',
+    component: Cart,
     meta: {
       requiresAuth:true
     }

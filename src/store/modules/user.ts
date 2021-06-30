@@ -32,7 +32,9 @@ const userModule: Module<any, any> = {
     },
     REMOVE_FROM_CART: (state, item) => {
       const index = state.cart.indexOf(item)
-      delete state.cart[index]
+      if (index > -1) {
+        state.cart.splice(index, 1);
+      }
     },
     RESET: state => {
       Object.assign(state, getDefaultState());
