@@ -46,8 +46,8 @@ export default class Article extends Vue {
     @Emit()
     addArticleToCart(id: any) {
         let item = this.$store.getters.getArticles.find((e:any) => e._id == id)
-        if (this.$store.getters.getCart.find(e => e.restaurantId == item.restaurantId) || this.$store.getters.getCart[0] === undefined) {
-            console.log(!!this.$store.getters.getCart.find(e => e.restaurantId == item.restaurantId) || this.$store.getters.getCart[0] === undefined)
+        if (this.$store.getters.getCart.find((e:any) => e.restaurantId == item.restaurantId) || this.$store.getters.getCart[0] === undefined) {
+            console.log(!!this.$store.getters.getCart.find((e:any) => e.restaurantId == item.restaurantId) || this.$store.getters.getCart[0] === undefined)
             this.$store.dispatch('addToCart', {item:item})
         }
     }
