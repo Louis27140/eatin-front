@@ -20,9 +20,11 @@ axios.interceptors.response.use(
     (response:any) => {return response;},
     async function(err:any) {
         const originalRequest = err.config;
-        if (err.response.status == '403' && !originalRequest._retry) {
+        const old = store.getters.getToken
+        if (err.response.status == '401' && !originalRequest._retry) {
             const res = await axios.post('auth/refresh', {expiredToken:store.getters.getToken, refreshToken: store.getters.getRefreshToken})
-            store.dispatch('refresh', {res})
+            store.dispatch('refresh', {response:res})
+            console.log(old + '|' + store.getters.getToken)
             return axios(originalRequest)
         }
         console.log(err)

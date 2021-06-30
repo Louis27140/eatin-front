@@ -9,5 +9,8 @@ export default {
     },
     async profile() {
         return await axios.get('profile')
-    }
+    },
+    async firebase(data:any) {
+        return await axios.post('/notification', data)
+    } 
 }
