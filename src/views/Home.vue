@@ -25,7 +25,7 @@ import Vue from 'vue'
       this.$store.dispatch('setRestaurants')
     },
     async mounted() {
-      const token = await this.$messaging.getToken({ vapidKey: 'BNiHc6Sox1vukTgBDzEZpCR0e6GlNVFyN5w-lfcF9WnLZ0nEwQfyKZqhfPpRbt6lGsJlC-kd9nHlW59ZFutPkV0' }).catch((err:any) => console.log(err))
+      /*const token = await this.$messaging.getToken({ vapidKey: 'BNiHc6Sox1vukTgBDzEZpCR0e6GlNVFyN5w-lfcF9WnLZ0nEwQfyKZqhfPpRbt6lGsJlC-kd9nHlW59ZFutPkV0' }).catch((err:any) => console.log(err))
       const data = {
       deviceId: token
        }
@@ -47,7 +47,7 @@ import Vue from 'vue'
         notification.close();
         console.log(event);
       };
-    });
+    });*/
 },
     components: {
       Restaurant,
