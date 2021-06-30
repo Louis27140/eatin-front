@@ -6,7 +6,8 @@ const getDefaultState = () => {
       restaurants: [],
       currentRestaurant: {},
       menues: [],
-      articles: []
+      articles: [],
+      categories:[],
     }
 }
 
@@ -19,6 +20,18 @@ const restaurantModule: Module<any, any> = {
     getRestaurant: state => {
         return state.currentRestaurant
     },
+    getMenues: state => {
+      return state.menues
+    },
+    getArticles: state => {
+    return state.articles
+    },
+    getCategories: state => {
+      return state.categories
+    },
+    getID: state => {
+      return state.currentRestaurant._id
+    }
   },
   mutations: {
     SET_RESTAURANTS: (state, restaurants) => {
@@ -28,11 +41,20 @@ const restaurantModule: Module<any, any> = {
       state.menues = menues;
     },
     SET_ARTICLES: (state, articles) => {
-      state.restaurants = articles;
+      state.articles = articles;
+    },
+    SET_CATEGORIES: (state, categories) => {
+      state.categories = categories
     },
     SET_RESTAURANT: (state, id) => {
         state.currentRestaurant = state.restaurants.filter((e:any) => (e._id === id))[0];
       },
+      RESET_RESTAURANT: (state) => {
+        state.currentRestaurant = {}
+        state.articles = []
+        state.categories = []
+        state.menues = []
+      }
   },
   actions: {
     setRestaurants: async ({commit}) => {
@@ -49,7 +71,11 @@ const restaurantModule: Module<any, any> = {
     setArticles: async ({commit}) => {
       const res = await restaurantService.getarticles();
       commit('SET_ARTICLES', res.data)
-    }
+    },
+    setCategories: async ({commit}) => {
+      const res = await restaurantService.getCategories();
+      commit('SET_CATEGORIES', res.data)
+    },
   }
 }
 

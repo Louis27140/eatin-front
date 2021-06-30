@@ -1,6 +1,9 @@
 <template>
   <v-container width="75vw" absolute right>
     <v-text-field elevation="24" prepend-icon="mdi-search"></v-text-field>
+    <v-spacer/>
+    <h2>Restaurant</h2>
+    <v-spacer></v-spacer>
     <v-row>
       <v-col xs="12"  md="4" :key="item.id" v-for="item in restaurants">
         <restaurant v-bind="item" :id="item._id"  :src="item.profilePicture" :name="item.name" :desc="item.description"/>

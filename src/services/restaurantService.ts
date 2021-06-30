@@ -11,5 +11,8 @@ export default {
     },
     async getarticles() {
         return await axios.get('restaurant/' + store.getters.getID + '/article')
+    },
+    async getCategories() {
+        return await axios.get('restaurant/' + store.getters.getID + '/category')
     }
 }

@@ -1,7 +1,7 @@
 <template>
     <v-hover>
         <template  v-slot:default="{ hover}">
-            <v-card tile elevation="24">
+            <v-card tile elevation="12">
                 <v-img
                 height="100"
                 :src="img"
@@ -23,7 +23,7 @@
                         absolute
                         color="#036358"
                     >
-                <v-btn @click="pizza">Afficher</v-btn>
+                <v-btn>Afficher</v-btn>
                 </v-overlay>
     </v-fade-transition>
             </v-card>

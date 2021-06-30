@@ -32,7 +32,7 @@ import { Component, Emit, Prop, Vue } from 'vue-property-decorator';
 
 @Component
 export default class Restaurant extends Vue {
-    @Prop() id: string|undefined
+    @Prop() id: number|undefined
     @Prop() src: string|undefined
     @Prop() name: string|undefined
     @Prop() desc: string|undefined
