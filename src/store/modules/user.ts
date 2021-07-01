@@ -1,26 +1,28 @@
 import { Module } from "vuex";
-import AuthService from '@/services/AuthService'
- 
+import AuthService from "@/services/AuthService";
+import userService from "@/services/userService";
+
 const getDefaultState = () => {
   return {
     user: {},
-    cart: []
-  }
-}
+    cart: [],
+  };
+};
 
 const userModule: Module<any, any> = {
-  state:getDefaultState(),
-  getters:{
-    getInitials: state => {
-      const fullname = state.user.fullName
-      if (fullname != undefined) return fullname.firstName[0]+fullname.lastName[0]
-      return ''
+  state: getDefaultState(),
+  getters: {
+    getInitials: (state) => {
+      const fullname = state.user.fullName;
+      if (fullname != undefined)
+        return fullname.firstName[0] + fullname.lastName[0];
+      return "";
     },
-    getUser: state => {
-      return state.user
+    getUser: (state) => {
+      return state.user;
     },
-    getCart: state => {
-        return state.cart
+    getCart: (state) => {
+      return state.cart;
     },
   },
   mutations: {
@@ -28,31 +30,34 @@ const userModule: Module<any, any> = {
       state.user = user;
     },
     ADD_TO_CART: (state, item) => {
-      state.cart.push(item)
+      state.cart.push(item);
     },
     REMOVE_FROM_CART: (state, item) => {
-      const index = state.cart.indexOf(item)
-      delete state.cart[index]
+      const index = state.cart.indexOf(item);
+      delete state.cart[index];
     },
-    RESET: state => {
+    RESET: (state) => {
       Object.assign(state, getDefaultState());
-    }
+    },
   },
   actions: {
     profile: async ({ commit, dispatch }) => {
-        const response = await AuthService.profile()
-        commit('SET_USER', response.data);
+      const response = await AuthService.profile();
+      commit("SET_USER", response.data);
     },
     logout: ({ commit, dispatch }) => {
-      commit('RESET', '');
+      commit("RESET", "");
     },
-    addToCart: ({commit}, {item}) => {
-      commit('ADD_TO_CART', item)
+    addToCart: ({ commit }, { item }) => {
+      commit("ADD_TO_CART", item);
     },
-    removeToCart: ({commit}, {item}) => {
-      commit('REMOVE_FROM_CART', item)
-    }
-  }
-}
+    removeToCart: ({ commit }, { item }) => {
+      commit("REMOVE_FROM_CART", item);
+    },
+    updateProfile: async ({ commit }, { profile }) => {
+      await userService.updateProfile(profile);
+    },
+  },
+};
 
 export default userModule;
