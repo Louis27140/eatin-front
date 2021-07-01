@@ -6,11 +6,15 @@ import store from "./store";
 import vuetify from "./plugins/vuetify";
 import helpers from "@/helpers";
 import vClickOutside from "v-click-outside";
+import VueApexCharts from "vue-apexcharts";
 
 Vue.config.productionTip = false
 
 Vue.use(helpers);
 Vue.use(vClickOutside);
+Vue.use(VueApexCharts);
+
+Vue.component("apexchart", VueApexCharts);
 
 
 

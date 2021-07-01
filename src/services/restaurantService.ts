@@ -51,4 +51,7 @@ export default {
       category
     );
   },
+  async getStatistics() {
+    return await axios.get("statistic/" + store.getters.getID);
+  },
 };

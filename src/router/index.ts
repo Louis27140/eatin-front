@@ -10,6 +10,7 @@ import Signup from "../views/Authentication/Signup.vue";
 import Profile from "../views/Authentication/Profile.vue";
 import Monitoring from "../views/monitoring/Monitoring.vue";
 import Restaurant from "../views/restaurants/Restaurant.vue";
+import Statistics from "../views/restaurants/Statistics.vue";
 
 import EditRestaurant from "../views/restaurants/EditRestaurant.vue";
 import Cart from '../views/Checkout.vue'
@@ -68,8 +69,17 @@ const routes: Array<RouteConfig> = [
     },
   },
   {
-    path: '/orders',
-    name: 'Orders',
+    path: "/statistics",
+    name: "statistics",
+    component: Statistics,
+    meta: {
+      requiresAuth: true,
+      roles: ["RES"],
+    },
+  },
+  {
+    path: "/orders",
+    name: "Orders",
     component: OrderHistory,
     meta: {
       requiresAuth: true,

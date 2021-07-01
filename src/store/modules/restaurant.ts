@@ -8,6 +8,7 @@ const getDefaultState = () => {
     menues: [],
     articles: [],
     categories: [],
+    statistics: [],
   };
 };
 
@@ -32,6 +33,9 @@ const restaurantModule: Module<any, any> = {
     getID: (state) => {
       return state.currentRestaurant._id;
     },
+    getStatistics: (state) => {
+      return state.statistics;
+    },
   },
   mutations: {
     SET_RESTAURANTS: (state, restaurants) => {
@@ -54,6 +58,9 @@ const restaurantModule: Module<any, any> = {
       state.articles = [];
       state.categories = [];
       state.menues = [];
+    },
+    SET_STATISTICS: (state, statistics) => {
+      state.statistics = statistics;
     },
   },
   actions: {
@@ -103,6 +110,10 @@ const restaurantModule: Module<any, any> = {
     createCategory: async ({ dispatch }, { category }) => {
       await restaurantService.createCategory(category);
       await dispatch("setCategories");
+    },
+    setStatistics: async ({ commit }) => {
+      const res = await restaurantService.getStatistics();
+      commit("SET_STATISTICS", res.data);
     },
   },
 };
