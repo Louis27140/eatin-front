@@ -34,12 +34,16 @@
             v-for="category in categories"
             :key="category._id"
             class="ma-2"
-            close
             >{{ category.name }}</v-chip
           >
-          <v-btn icon class="ma-2" color="success">
-            <v-icon>mdi-plus</v-icon>
-          </v-btn>
+          <v-dialog v-model="categoryDialog" width="500px">
+            <template v-slot:activator="{ on, attrs }">
+              <v-btn icon class="ma-2" color="success" v-bind="attrs" v-on="on">
+                <v-icon>mdi-plus</v-icon>
+              </v-btn>
+            </template>
+            <category-popup @close="closeCategory" />
+          </v-dialog>
         </v-row>
       </v-col>
     </v-row>
@@ -48,7 +52,7 @@
         <h1 class="mb-4">Articles</h1>
         <v-row align="center">
           <edit-restaurant-item
-            type="menu"
+            type="article"
             v-for="article in articles"
             :key="article._id"
             :item="article"
@@ -76,18 +80,13 @@
             :key="menu._id"
             :item="menu"
           />
-          <v-dialog v-model="articleDialog" width="500px">
+          <v-dialog v-model="menuDialog" width="500px">
             <template v-slot:activator="{ on, attrs }">
               <v-btn class="ma-2" color="success" v-bind="attrs" v-on="on">
                 <v-icon>mdi-plus</v-icon>
               </v-btn>
             </template>
-            <!-- CHANGE THIS -->
-            <article-popup
-              @close="closeArticle"
-              :article="{}"
-              action="create"
-            />
+            <menu-popup @close="closeMenu" :menu="{}" action="create" />
           </v-dialog>
         </v-row>
       </v-col>
@@ -101,12 +100,20 @@ import Vue from "vue";
 import vFormBase from "vuetify-form-base";
 import EditRestaurantItem from "@/components/restaurants/EditRestaurantItem.vue";
 import ArticlePopup from "@/components/restaurants/ArticlePopup.vue";
+import MenuPopup from "@/components/restaurants/MenuPopup.vue";
+import CategoryPopup from "@/components/restaurants/CategoryPopup.vue";
 
 import formHelpers from "@/helpers/formHelpers";
 
 export default Vue.extend({
   name: "EditRestaurant",
-  components: { vFormBase, EditRestaurantItem, ArticlePopup },
+  components: {
+    vFormBase,
+    EditRestaurantItem,
+    ArticlePopup,
+    MenuPopup,
+    CategoryPopup,
+  },
   data() {
     return {
       readOnly: true,
@@ -114,6 +121,8 @@ export default Vue.extend({
       editable: false,
       restaurant: {},
       articleDialog: false,
+      menuDialog: false,
+      categoryDialog: false,
       restaurantSchema: {
         name: {
           type: "text",
@@ -193,6 +202,12 @@ export default Vue.extend({
 
     closeArticle() {
       this.articleDialog = false;
+    },
+    closeMenu() {
+      this.menuDialog = false;
+    },
+    closeCategory() {
+      this.categoryDialog = false;
     },
   },
 });

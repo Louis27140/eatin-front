@@ -92,6 +92,18 @@ const restaurantModule: Module<any, any> = {
       await restaurantService.updateArticle(article);
       await dispatch("setArticles");
     },
+    createMenu: async ({ dispatch }, { menu }) => {
+      await restaurantService.createMenu(menu);
+      await dispatch("setMenues");
+    },
+    updateMenu: async ({ dispatch }, { menu }) => {
+      await restaurantService.updateMenu(menu);
+      await dispatch("setMenues");
+    },
+    createCategory: async ({ dispatch }, { category }) => {
+      await restaurantService.createCategory(category);
+      await dispatch("setCategories");
+    },
   },
 };
 

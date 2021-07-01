@@ -8,7 +8,18 @@
             <v-icon>mdi-pen</v-icon>
           </v-btn>
         </template>
-        <article-popup @close="close" :article="item" action="update" />
+        <article-popup
+          v-if="type == 'article'"
+          @close="close"
+          :article="item"
+          action="update"
+        />
+        <menu-popup
+          v-if="type == 'menu'"
+          @close="close"
+          :menu="item"
+          action="update"
+        />
       </v-dialog>
     </v-card-title>
     <v-card-text>{{ item.description }}</v-card-text>
@@ -17,11 +28,12 @@
 
 <script>
 import ArticlePopup from "@/components/restaurants/ArticlePopup.vue";
+import MenuPopup from "@/components/restaurants/MenuPopup.vue";
 
 export default {
-  components: { ArticlePopup },
+  components: { ArticlePopup, MenuPopup },
   name: "EditRestaurantItem",
-  props: ["item"],
+  props: ["item", "type"],
   data() {
     return {
       dialog: false,

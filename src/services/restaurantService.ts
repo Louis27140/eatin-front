@@ -33,4 +33,22 @@ export default {
       article
     );
   },
+  async updateMenu(menu) {
+    return await axios.put(
+      "restaurant/" + store.getters.getID + "/menu/" + menu["_id"],
+      menu
+    );
+  },
+  async createMenu(menu) {
+    return await axios.post(
+      "restaurant/" + store.getters.getID + "/menu",
+      menu
+    );
+  },
+  async createCategory(category) {
+    return await axios.post(
+      "restaurant/" + store.getters.getID + "/category",
+      category
+    );
+  },
 };
