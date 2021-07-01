@@ -9,7 +9,9 @@ import Login from "../views/Authentication/Login.vue";
 import Signup from "../views/Authentication/Signup.vue";
 import Profile from "../views/Authentication/Profile.vue";
 import Monitoring from "../views/monitoring/Monitoring.vue";
+import Restaurant from "../views/restaurants/Restaurant.vue";
 
+import EditRestaurant from "../views/restaurants/EditRestaurant.vue";
 import Cart from '../views/Checkout.vue'
 
 import RestaurantPage from "../components/routes/RestaurantPage.vue";
@@ -47,14 +49,22 @@ const routes: Array<RouteConfig> = [
     },
   },
   {
-    path: "/restaurant",
-    name: "restaurant",
-    redirect: "/",
-    component: RestaurantPage,
+    path: "/restaurant/:rest",
+    name: "Restaurant",
+    component: Restaurant,
+    meta: {
+      requiresAuth: true,
+      roles: ["USR"],
+    },
+  },
+  {
+    path: "/my-restaurant",
+    name: "my-restaurant",
+    component: EditRestaurant,
     children: restaurantsRoute,
     meta: {
       requiresAuth: true,
-      roles: ["USR", "RES"],
+      roles: ["RES"],
     },
   },
   {
@@ -101,7 +111,7 @@ const defaultRoutes = [
   },
   {
     role: "RES",
-    path: "/restaurant",
+    path: "/my-restaurant",
   },
   {
     role: "DEL",

@@ -1,33 +1,36 @@
 import restaurantService from "@/services/restaurantService";
 import { Module } from "vuex";
- 
+
 const getDefaultState = () => {
   return {
-      restaurants: [],
-      currentRestaurant: {},
-      menues: [],
-      articles: [],
-      categories:[],
-    }
-}
+    restaurants: [],
+    currentRestaurant: {},
+    menues: [],
+    articles: [],
+    categories: [],
+  };
+};
 
 const restaurantModule: Module<any, any> = {
-  state:getDefaultState(),
-  getters:{
-    getRestaurants: state => {
-        return state.restaurants
+  state: getDefaultState(),
+  getters: {
+    getRestaurants: (state) => {
+      return state.restaurants;
     },
-    getRestaurant: state => {
-        return state.currentRestaurant
+    getRestaurant: (state) => {
+      return state.currentRestaurant;
     },
-    getMenues: state => {
-      return state.menues
+    getMenues: (state) => {
+      return state.menues;
     },
-    getArticles: state => {
-    return state.articles
+    getArticles: (state) => {
+      return state.articles;
     },
-    getCategories: state => {
-      return state.categories
+    getCategories: (state) => {
+      return state.categories;
+    },
+    getID: (state) => {
+      return state.currentRestaurant._id;
     },
   },
   mutations: {
@@ -41,39 +44,55 @@ const restaurantModule: Module<any, any> = {
       state.articles = articles;
     },
     SET_CATEGORIES: (state, categories) => {
-      state.categories = categories
+      state.categories = categories;
     },
-    SET_RESTAURANT: (state, id) => {
-        state.currentRestaurant = state.restaurants.find((e:any) => (e._id === id));
-      },
-      RESET_RESTAURANT: (state) => {
-        state.currentRestaurant = {}
-        state.articles = []
-        state.categories = []
-        state.menues = []
-      }
+    SET_RESTAURANT: (state, restaurant) => {
+      state.currentRestaurant = restaurant;
+    },
+    RESET_RESTAURANT: (state) => {
+      state.currentRestaurant = {};
+      state.articles = [];
+      state.categories = [];
+      state.menues = [];
+    },
   },
   actions: {
-    setRestaurants: async ({commit}) => {
-        const res = await restaurantService.getRestaurants();
-      commit('SET_RESTAURANTS', res.data)
+    setRestaurants: async ({ commit }) => {
+      const res = await restaurantService.getRestaurants();
+      commit("SET_RESTAURANTS", res.data);
     },
-    setRestaurant: ({commit}, {id}) => {
-      commit('SET_RESTAURANT', id)
+    setRestaurant: async ({ commit }, { id }) => {
+      const res = await restaurantService.getRestaurant(id);
+      commit("SET_RESTAURANT", res.data);
     },
-    setMenues: async ({commit}) => {
+    setSelfRestaurant: async ({ commit }) => {
+      const res = await restaurantService.getSelfRestaurant();
+      commit("SET_RESTAURANT", res.data);
+    },
+    setMenues: async ({ commit }) => {
       const res = await restaurantService.getMenues();
-      commit('SET_MENUES', res.data)
+      commit("SET_MENUES", res.data);
     },
-    setArticles: async ({commit}) => {
-      const res = await restaurantService.getarticles();
-      commit('SET_ARTICLES', res.data)
+    setArticles: async ({ commit }) => {
+      const res = await restaurantService.getArticles();
+      commit("SET_ARTICLES", res.data);
     },
-    setCategories: async ({commit}) => {
+    setCategories: async ({ commit }) => {
       const res = await restaurantService.getCategories();
-      commit('SET_CATEGORIES', res.data)
+      commit("SET_CATEGORIES", res.data);
     },
-  }
-}
+    updateRestaurant: async ({ commit }, { restaurant }) => {
+      await restaurantService.updateRestaurant(restaurant);
+    },
+    createArticle: async ({ dispatch }, { article }) => {
+      await restaurantService.createArticle(article);
+      await dispatch("setArticles");
+    },
+    updateArticle: async ({ dispatch }, { article }) => {
+      await restaurantService.updateArticle(article);
+      await dispatch("setArticles");
+    },
+  },
+};
 
 export default restaurantModule;

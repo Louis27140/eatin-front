@@ -193,6 +193,7 @@ export default Vue.extend({
         this.$store.dispatch('signup', {infos:this.infos})
         .then(() => this.loader = true).catch(err =>{ this.$store.dispatch('setAlert', {type:'error',alert:err.response.data.details.message})})
         .finally(() => {
+          await this.$store.dispatch("profile");
           this.loader = false;
 
           this.$router.push("/");

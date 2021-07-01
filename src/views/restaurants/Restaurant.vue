@@ -1,14 +1,21 @@
 <template>
-<v-container fluid>
+  <v-container fluid>
     <v-card>
-        <v-img :src="img(restaurant.profilePicture)"
+      <v-img
+        :src="img(restaurant.profilePicture)"
         height="250"
         class="align-end"
+      >
+        <v-btn rounded absolute top left @click="$router.go(-1)"
+          ><v-icon>mdi-arrow-left</v-icon>Page précedente</v-btn
         >
-        <v-btn rounded absolute top left @click="$router.go(-1)"><v-icon>mdi-arrow-left</v-icon>Page précedente</v-btn>
         <v-container>
-            <v-card-title class="white--text text-h2 justify-start ">{{restaurant.name}}</v-card-title>
-            <v-card-subtitle class="white--text text-h6 justify-start ">{{restaurant.description}}</v-card-subtitle>
+          <v-card-title class="white--text text-h2 justify-start ">{{
+            restaurant.name
+          }}</v-card-title>
+          <v-card-subtitle class="white--text text-h6 justify-start ">{{
+            restaurant.description
+          }}</v-card-subtitle>
         </v-container>
         </v-img>
         <v-tabs v-model="tab">
@@ -37,21 +44,22 @@
             </v-col>
         </v-tab-item>
     </v-tabs-items>
-</v-container>
+  </v-container>
 </template>
 
 <script>
-import Vue from 'vue'
+import Vue from "vue";
 
-import Article from '@/components/restaurants/Article.vue'
-import Menu from '@/components/restaurants/Menu.vue'
+import Article from "@/components/restaurants/Article.vue";
+import Menu from "@/components/restaurants/Menu.vue";
 
 export default Vue.extend({
-name:'Restaurant',
-components:{
-    'menue': Menu,
-     'my-article':Article},
-data() {
+  name: "Restaurant",
+  components: {
+    menue: Menu,
+    "my-article": Article,
+  },
+  data() {
     return {
         tab:0,
         categories: [],
@@ -88,6 +96,4 @@ computed: {
 })
 </script>
 
-<style>
-
-</style>
+<style></style>

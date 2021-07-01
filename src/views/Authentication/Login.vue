@@ -86,7 +86,7 @@ export default Vue.extend({
 
             this.loader = false;
 
-            this.$router.push("/");
+            this.$router.push("/restaurant");
           });
     },
     log(val) {

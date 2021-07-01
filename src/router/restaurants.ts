@@ -1,13 +1,7 @@
-import { RouteConfig } from 'vue-router'
+import { RouteConfig } from "vue-router";
 
-import Restaurant from '../views/restaurants/Restaurant.vue'
+import Restaurant from "../views/restaurants/Restaurant.vue";
 
-const restaurantsRoute: Array<RouteConfig> = [
-    {
-       path:':rest',
-       name:'Restaurant',
-       component: Restaurant
-    }
-]
+const restaurantsRoute: Array<RouteConfig> = [];
 
-export default restaurantsRoute
+export default restaurantsRoute;
