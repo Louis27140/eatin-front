@@ -11,32 +11,24 @@
     "esModuleInterop": true,
     "allowSyntheticDefaultImports": true,
     "sourceMap": true,
-    "noImplicitAny": true,
+    "noImplicitAny": false,
     "allowJs": true,
     "baseUrl": ".",
-    "types": [
-      "webpack-env"
-    ],
+    "types": ["webpack-env"],
     "paths": {
-      "@/*": [
-        "src/*"
-      ]
+      "@/*": ["src/*"]
     },
-    "lib": [
-      "esnext",
-      "dom",
-      "dom.iterable",
-      "scripthost"
-    ]
+    "lib": ["esnext", "dom", "dom.iterable", "scripthost"]
   },
   "include": [
     "src/**/*.ts",
     "src/**/*.tsx",
     "src/**/*.vue",
     "tests/**/*.ts",
-    "tests/**/*.tsx"
-, "src/helpers/index.js", "src/helpers/formHelpers.js", "src/firebase-messaging-sw.js"  ],
-  "exclude": [
-    "node_modules"
-  ]
+    "tests/**/*.tsx",
+    "src/helpers/index.js",
+    "src/helpers/formHelpers.js",
+    "src/firebase-messaging-sw.js"
+  ],
+  "exclude": ["node_modules"]
 }

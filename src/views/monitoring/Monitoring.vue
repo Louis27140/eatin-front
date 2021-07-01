@@ -1,40 +1,28 @@
 <template>
-  <v-container width="75vw" absolute right>
-    <v-text-field elevation="24" prepend-icon="mdi-search"></v-text-field>
-    <v-spacer />
-    <h2>Restaurant</h2>
+  <v-container width="75vw" absolute right class="py-5">
+    <h1>Evènements en temps réel</h1>
     <v-spacer></v-spacer>
-    <v-row>
-      <v-col xs="12" md="4" :key="item.id" v-for="item in restaurants">
-        <restaurant
-          v-bind="item"
-          :id="item._id"
-          :src="item.profilePicture"
-          :name="item.name"
-          :desc="item.description"
-        />
-      </v-col>
-    </v-row>
+    <realtime-dashboard class="my-5" :token="this.token" :host="host" />
   </v-container>
 </template>
 
 <script lang="ts">
 import Vue from "vue";
-import Restaurant from "../components/Restaurant.vue";
+import RealtimeDashboard from "ws-realtime-dashboard";
 
 export default Vue.extend({
-  name: "Home",
+  components: { RealtimeDashboard },
+  name: "Monitoring",
 
-  created() {
-    this.$store.dispatch("profile");
-    this.$store.dispatch("setRestaurants");
+  data() {
+    return {
+      host: process.env.VUE_APP_WS_URL,
+    };
   },
-  components: {
-    Restaurant,
-  },
+
   computed: {
-    restaurants() {
-      return this.$store.getters.getRestaurants;
+    token() {
+      return this.$store.getters.getToken;
     },
   },
 });
