@@ -1,32 +1,61 @@
 <template>
-  <div id="app">
-    <div id="nav">
-      <router-link to="/">Home</router-link> |
-      <router-link to="/about">About</router-link>
-    </div>
-    <router-view/>
-  </div>
+  <v-app>
+    <navbar :isLoggedIn="isloggedIn" :initials="initials"></navbar>
+    <v-main>
+      <alert :error="msg"></alert>
+      <router-view/>
+    </v-main>
+      <cart :items="[]" :quantity="5"></cart>
+    <foot :buttons="buttons"></foot>
+  </v-app>
 </template>
 
-<style>
-#app {
-  font-family: Avenir, Helvetica, Arial, sans-serif;
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
-  text-align: center;
-  color: #2c3e50;
-}
+<script lang="ts">
+import Vue from 'vue';
 
-#nav {
-  padding: 30px;
-}
+import Alert from './components/layouts/Alert.vue';
+import Footer from './components/layouts/Footer.vue';
+import NavBar from './components/layouts/NavBar.vue';
 
-#nav a {
-  font-weight: bold;
-  color: #2c3e50;
-}
+import firebase from 'firebase'
+import Cart from './components/layouts/Cart.vue';
 
-#nav a.router-link-exact-active {
-  color: #42b983;
-}
-</style>
+const buttons = [
+    {name: "CGU", link: "cgu"},
+    {name: "CGV", link: "cgv"},
+    {name: "Mentions légales", link: "legals"},
+    {name: "RGPD", link: "rgpd"},
+  ]
+
+export default Vue.extend({
+  name: 'App',
+
+  data: () => ({
+    buttons,
+  }),
+  created() {
+    
+    const messaging = firebase.messaging();
+
+    const token = firebase.messaging().getToken({ vapidKey: 'BNiHc6Sox1vukTgBDzEZpCR0e6GlNVFyN5w-lfcF9WnLZ0nEwQfyKZqhfPpRbt6lGsJlC-kd9nHlW59ZFutPkV0' }).catch(err => console.log(err))
+},
+  components: {
+    'navbar': NavBar,
+    'foot': Footer,
+    'alert': Alert,
+    'cart': Cart
+  },
+  computed: {
+    isloggedIn() {
+      return this.$store.getters.isLoggedIn
+    },
+    initials() {
+      return this.$store.getters.getInitials
+    },
+    msg() {
+      return this.$store.getters.getMsg
+    },
+  }
+});
+</script>
+e>
