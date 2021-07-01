@@ -2,6 +2,7 @@ import { Module } from "vuex";
  
 const getDefaultState = () => {
   return {
+    type: '',
     message: ''
   }
 }
@@ -9,6 +10,9 @@ const getDefaultState = () => {
 const alertModule: Module<any, any> = {
   state:getDefaultState(),
   getters:{
+    getType: state => {
+      return state.type
+    },
     getMsg: state => {
         return state.message
     },
@@ -17,16 +21,20 @@ const alertModule: Module<any, any> = {
     SET_ALERT: (state, message) => {
       state.message = message;
     },
-    RESET: state => {
+    SET_TYPE: (state, type) => {
+      state.type = type;
+    },
+    RESET_ALERT: state => {
       Object.assign(state, getDefaultState());
     }
   },
   actions: {
-    setAlert: async ({ commit, dispatch }, {alert}) => {
+    setAlert: async ({ commit, dispatch }, {type , alert}) => {
         commit('SET_ALERT', alert);
+        commit('SET_TYPE', type);
     },
-    reset: async ({ commit, dispatch }) => {
-      commit('RESET');
+    resetAlert: async ({ commit, dispatch }) => {
+      commit('RESET_ALERT');
   },
   }
 }

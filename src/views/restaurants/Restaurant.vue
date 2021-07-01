@@ -13,14 +13,14 @@
         </v-img>
         <v-tabs v-model="tab">
             <v-tab>Menu</v-tab>
-            <v-tab :key="category._id" v-for="category in categories">
+            <v-tab :key="category._id" v-for="category in categoriesTabs">
                 {{category.name}}
             </v-tab>
 
         </v-tabs>
     </v-card>
     <v-tabs-items v-model="tab">
-        <v-tab-item tabindex="0" >
+        <v-tab-item tabindex="0">
             <v-container>
                 <v-col >
                     <v-row xs="12"  md="4">
@@ -32,7 +32,7 @@
         <v-tab-item :key="filter" v-for="filter in filteredArticles">
             <v-col >
                 <v-row xs="12"  class="pa-4">
-                    <my-article :key="article._id" v-for="article in filter"  :desc="article.description" :id="article._id" :name="article.name" :src="article.profilePicture"></my-article>
+                    <my-article class="ma-5" :key="article._id" v-for="article in filter"  :desc="article.description" :id="article._id" :name="article.name" :src="article.profilePicture"></my-article>
                 </v-row>
             </v-col>
         </v-tab-item>
@@ -54,7 +54,6 @@ components:{
 data() {
     return {
         tab:0,
-        filteredArticles: [],
         categories: [],
         articles: [],
     }
@@ -63,15 +62,6 @@ created() {
     this.$store.dispatch('setMenues')
     this.$store.dispatch('setArticles')
     this.$store.dispatch('setCategories')
-},
-mounted() {
-    this.categories = this.$store.getters.getCategories
-    this.articles = this.$store.getters.getArticles
-
-    this.$store.getters.getCategories.forEach(async category => {
-        let tmp = await this.articles.filter(article => article.category == category._id)
-        this.filteredArticles.push(tmp)
-    });
 },
 methods: {
     img(src) {
@@ -85,7 +75,15 @@ methods: {
 computed: {
     restaurant() { return this.$store.getters.getRestaurant },
     menues() { return this.$store.getters.getMenues },
-
+    categoriesTabs() {return this.$store.getters.getCategories},
+    filteredArticles() {
+        let filtered = []
+        this.$store.getters.getCategories.forEach(category => {
+            let tmp = this.$store.getters.getArticles.filter(article => article.category == category._id)
+            filtered.push(tmp)
+        });
+        return filtered
+    }
 }
 })
 </script>

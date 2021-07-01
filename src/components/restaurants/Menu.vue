@@ -23,9 +23,9 @@
                         absolute
                         color="#036358"
                     >
-                <v-btn>Afficher</v-btn>
+                <v-btn >Composer</v-btn>
                 </v-overlay>
-    </v-fade-transition>
+            </v-fade-transition>
             </v-card>
         </template>
     </v-hover>
@@ -51,7 +51,6 @@ export default class Menu extends Vue {
     @Emit()
     accessRestaurant() {
         this.$store.dispatch('setRestaurant', {id:this.id})
-        this.$router.push('/restaurant/' + this.name)
     }
 
     get img() {

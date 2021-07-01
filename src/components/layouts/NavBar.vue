@@ -11,6 +11,7 @@
             </v-app-bar-title>
         </router-link>
         <v-spacer/>
+        <cart :isLoggedIn="isLoggedIn" :items="items" :quantity="items.length"></cart>
         <v-btn 
         class="black--text"
         color="white"
@@ -79,9 +80,15 @@
 </template>
 
 <script lang="ts">
-import { Component, Emit, Prop, Vue } from 'vue-property-decorator';
-import { mapActions } from 'vuex';
-@Component
+import { Component, Emit, Prop, Ref, Vue } from 'vue-property-decorator';
+
+import Cart from './Cart.vue'
+
+@Component({
+    components: {
+        'cart':Cart
+    }
+})
 export default class NavBar extends Vue {
     @Prop() isLoggedIn: boolean|undefined
     @Prop() initials: string|undefined
@@ -96,6 +103,10 @@ export default class NavBar extends Vue {
     logout() {
         this.$store.dispatch('logout')
         this.$router.push('/login')
+    }
+
+    get items() {
+        return this.$store.getters.getCart
     }
 
 }

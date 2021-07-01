@@ -10,7 +10,11 @@ import Signup from "../views/Authentication/Signup.vue";
 import Profile from "../views/Authentication/Profile.vue";
 import Monitoring from "../views/monitoring/Monitoring.vue";
 
+import Cart from '../views/Checkout.vue'
+
 import RestaurantPage from "../components/routes/RestaurantPage.vue";
+
+import OrderHistory from '../views/orders/History.vue'
 
 Vue.use(VueRouter);
 
@@ -54,9 +58,9 @@ const routes: Array<RouteConfig> = [
     },
   },
   {
-    path: "/orders",
-    name: "Orders",
-    redirect: "/",
+    path: '/orders',
+    name: 'Orders',
+    component: OrderHistory,
     meta: {
       requiresAuth: true,
     },
@@ -71,10 +75,18 @@ const routes: Array<RouteConfig> = [
     },
   },
   {
+    path: '/cart',
+    name: 'Cart',
+    component: Cart,
+    meta: {
+      requiresAuth:true
+    }
+  },
+  {
     path: "*",
     redirect: "/",
-  },
-];
+  }
+]
 
 const router = new VueRouter({
   mode: "history",

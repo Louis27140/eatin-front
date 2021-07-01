@@ -7,12 +7,12 @@ export default {
         return await axios.get('restaurant')
     },
     async getMenues() {
-        return await axios.get('restaurant/' + store.getters.getID + '/menu')
+        return await axios.get('restaurant/' + store.getters.getRestID + '/menu')
     },
     async getarticles() {
-        return await axios.get('restaurant/' + store.getters.getID + '/article')
+        return await axios.get('restaurant/' + store.getters.getRestID + '/article')
     },
     async getCategories() {
-        return await axios.get('restaurant/' + store.getters.getID + '/category')
+        return await axios.get('restaurant/' + store.getters.getRestID + '/category')
     }
 }

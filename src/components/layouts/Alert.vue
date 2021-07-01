@@ -1,5 +1,5 @@
 <template>
-  <v-alert v-if="!!error" type="error" text class="alert">
+  <v-alert v-if="!!error" :type="type" text class="alert">
     {{error}}
   </v-alert>
 </template>
@@ -9,11 +9,12 @@ import { Component, Prop, Vue } from 'vue-property-decorator';
 
 @Component
 export default class Alert extends Vue {
-    @Prop() error: any|undefined
+    @Prop() error: string|undefined
+    @Prop() type: string|undefined
 
     updated() {
       setTimeout(() => {
-        this.$store.dispatch('reset')
+        this.$store.dispatch('resetAlert')
       }, 2000)
     }
 }
