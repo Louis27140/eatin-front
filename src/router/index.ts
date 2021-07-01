@@ -1,87 +1,94 @@
-import Vue from 'vue'
-import VueRouter, { RouteConfig } from 'vue-router'
-import store from '@/store'
+import Vue from "vue";
+import VueRouter, { RouteConfig } from "vue-router";
+import store from "@/store";
 
-import restaurantsRoute from './restaurants'
+import restaurantsRoute from "./restaurants";
 
-import Home from '../views/Home.vue'
-import Login from '../views/Authentication/Login.vue'
-import Signup from '../views/Authentication/Signup.vue'
-import Profile from '../views/Authentication/Profile.vue'
+import Home from "../views/Home.vue";
+import Login from "../views/Authentication/Login.vue";
+import Signup from "../views/Authentication/Signup.vue";
+import Profile from "../views/Authentication/Profile.vue";
+import Monitoring from "../views/monitoring/Monitoring.vue";
 
-import RestaurantPage from '../components/routes/RestaurantPage.vue'
+import RestaurantPage from "../components/routes/RestaurantPage.vue";
 
-
-Vue.use(VueRouter)
+Vue.use(VueRouter);
 
 const routes: Array<RouteConfig> = [
   {
-    path: '/',
-    name: 'Home',
+    path: "/",
+    name: "Home",
     component: Home,
     meta: {
-      requiresAuth:true
-    }
+      requiresAuth: true,
+    },
   },
   {
-    path: '/login',
-    name: 'Login',
-    component: Login
+    path: "/login",
+    name: "Login",
+    component: Login,
   },
   {
-    path: '/signup',
-    name: 'Signup',
-    component: Signup
+    path: "/signup",
+    name: "Signup",
+    component: Signup,
   },
   {
-    path: '/profile',
-    name: 'Profile',
+    path: "/profile",
+    name: "Profile",
     component: Profile,
     meta: {
-      requiresAuth:true
-    }
+      requiresAuth: true,
+    },
   },
   {
-    path: '/restaurant',
-    name: 'restaurant',
-    redirect:'/',
+    path: "/restaurant",
+    name: "restaurant",
+    redirect: "/",
     component: RestaurantPage,
     children: restaurantsRoute,
     meta: {
-      requiresAuth:true
-    }
+      requiresAuth: true,
+    },
   },
   {
-    path: '/orders',
-    name: 'Orders',
-    redirect: '/',
+    path: "/orders",
+    name: "Orders",
+    redirect: "/",
     meta: {
-      requiresAuth:true
-    }
+      requiresAuth: true,
+    },
   },
   {
-    path: '*',
-    redirect: '/'
-  }
-]
+    path: "/monitoring",
+    name: "Monitoring",
+    component: Monitoring,
+    meta: {
+      requiresAuth: true,
+    },
+  },
+  {
+    path: "*",
+    redirect: "/",
+  },
+];
 
 const router = new VueRouter({
-  mode: 'history',
+  mode: "history",
   base: process.env.BASE_URL,
   routes,
-
-})
+});
 
 router.beforeEach(async (to, from, next) => {
-  if(to.matched.some(record => record.meta.requiresAuth)) {
+  if (to.matched.some((record) => record.meta.requiresAuth)) {
     if (await store.getters.isLoggedIn) {
-      next()
-      return
+      next();
+      return;
     }
-    next('/login')
+    next("/login");
   } else {
-    next()
+    next();
   }
-})
+});
 
-export default router
+export default router;
