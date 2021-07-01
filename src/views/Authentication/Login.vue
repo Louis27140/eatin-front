@@ -85,22 +85,8 @@ export default Vue.extend({
             this.$store.dispatch("profile");
 
             this.loader = false;
-            switch (this.$store.getters.getInfos.role) {
-              case "DEV":
-                this.$router.push("/dev");
-                break;
-              case "USR":
-                this.$router.push("/");
-                break;
-              case "RES":
-                this.$router.push("/restaurant");
-                break;
-              case "COM":
-                this.$router.push("/monitoring");
-                break;
-              default:
-                break;
-            }
+
+            this.$router.push("/");
           });
     },
     log(val) {
