@@ -21,6 +21,7 @@ const routes: Array<RouteConfig> = [
     component: Home,
     meta: {
       requiresAuth: true,
+      roles: ["USR"],
     },
   },
   {
@@ -49,6 +50,7 @@ const routes: Array<RouteConfig> = [
     children: restaurantsRoute,
     meta: {
       requiresAuth: true,
+      roles: ["USR", "RES"],
     },
   },
   {
@@ -65,6 +67,7 @@ const routes: Array<RouteConfig> = [
     component: Monitoring,
     meta: {
       requiresAuth: true,
+      roles: ["COM"],
     },
   },
   {
@@ -79,10 +82,42 @@ const router = new VueRouter({
   routes,
 });
 
-router.beforeEach(async (to, from, next) => {
-  if (to.matched.some((record) => record.meta.requiresAuth)) {
-    if (await store.getters.isLoggedIn) {
-      next();
+const defaultRoutes = [
+  {
+    role: "USR",
+    path: "/",
+  },
+  {
+    role: "RES",
+    path: "/restaurant",
+  },
+  {
+    role: "DEL",
+    path: "/",
+  },
+  {
+    role: "DEV",
+    path: "/",
+  },
+  {
+    role: "COM",
+    path: "/monitoring",
+  },
+];
+
+router.beforeEach(async (to: any, from, next) => {
+  if (to.meta.requiresAuth) {
+    if (store.getters.isLoggedIn) {
+      const userRole = store.getters.getInfos.role;
+      if (to.meta.roles) {
+        if (to.meta.roles.indexOf(userRole) != -1) {
+          next();
+        } else {
+          next(defaultRoutes.find((route) => route.role == userRole)?.path);
+        }
+      } else {
+        next();
+      }
       return;
     }
     next("/login");
