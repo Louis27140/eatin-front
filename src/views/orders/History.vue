@@ -9,8 +9,7 @@
                     {{new Date(order.updated_at).toUTCString()}}
                     <v-chip :color="setChips(order.status)[1]" dense><v-icon>{{setChips(order.status)[0]}}</v-icon></v-chip>
                     <v-btn color="success" icon @click="setStatus(order, 'PRE')" v-if="isRes && isPending(order.status)"><v-icon>mdi-check</v-icon></v-btn>
-                    <v-btn color="success" icon @click="setStatus(order, 'DEL')" v-if="isRes && isPrepare(order.status)"><v-icon>mdi-check</v-icon></v-btn>
-                    <v-btn color="success" icon @click="setStatus(order, 'AVA')" v-if="isDeliver && isPrepare(order.status)"><v-icon>mdi-check</v-icon></v-btn>
+                    <v-btn color="success" icon @click="setStatus(order, 'AVA')" v-if="isRes && isPrepare(order.status)"><v-icon>mdi-check</v-icon></v-btn>
                   </v-container>
                   
               </v-expansion-panel-header>
@@ -57,8 +56,7 @@ export default Vue.extend({
             switch(status) {
                 case 'PEN': return ['mdi-clock', 'warning']
                 case 'PRE': return ['mdi-chef-hat', 'primary']
-                case 'DEL': return ['mdi-bike', 'yellow']
-                case 'AVA': return ['pending', 'success']
+                case 'AVA': return ['mdi-bike', 'yellow']
             }
         },
         getItems(items, resid) {
