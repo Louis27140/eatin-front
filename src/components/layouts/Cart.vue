@@ -22,6 +22,7 @@
           dense
           v-bind="attrs"
           v-on="on"
+          small
           >
           <v-icon dark>mdi-cart</v-icon>
         </v-btn>
@@ -88,18 +89,5 @@ export default class Cart extends Vue {
 </script>
 
 <style scoped>
-
-scrollbar {
-      width: 20px; 
-   }
-
-scrollbar-track {
-    background-color: black;
-  }
-
-scrollbar-thumb {
-    background: #4e4e4e;
-    border-radius: 25px;
-  }
 
 </style>

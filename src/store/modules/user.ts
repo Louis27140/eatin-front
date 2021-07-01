@@ -1,13 +1,14 @@
 import { Module } from "vuex";
-import AuthService from "@/services/AuthService";
+import AuthService from '@/services/AuthService'
+import orderService from "@/services/orderService";
 import userService from "@/services/userService";
-
+ 
 const getDefaultState = () => {
   return {
     user: {},
     cart: [],
-  };
-};
+  }
+}
 
 const userModule: Module<any, any> = {
   state: getDefaultState(),
@@ -38,7 +39,10 @@ const userModule: Module<any, any> = {
         state.cart.splice(index, 1);
       }
     },
-    RESET: (state) => {
+    CLEAR_CART: (state) => {
+      state.cart = []
+    },
+    RESET: state => {
       Object.assign(state, getDefaultState());
     },
   },
@@ -53,8 +57,18 @@ const userModule: Module<any, any> = {
     addToCart: ({ commit }, { item }) => {
       commit("ADD_TO_CART", item);
     },
-    removeToCart: ({ commit }, { item }) => {
-      commit("REMOVE_FROM_CART", item);
+    removeToCart: ({commit}, {item}) => {
+      commit('REMOVE_FROM_CART', item)
+    },
+    async checkout({commit, state}) {
+      const itemId = state.cart.map((e:any) => {return e._id})
+      const restId = state.cart[0].restaurantId
+      const data = {
+        restaurantId:restId,
+        content:itemId
+      }
+      await orderService.checkout(data)
+      commit('CLEAR_CART')
     },
     updateProfile: async ({ commit }, { profile }) => {
       await userService.updateProfile(profile);

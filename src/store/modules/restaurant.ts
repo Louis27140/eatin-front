@@ -29,9 +29,6 @@ const restaurantModule: Module<any, any> = {
     getCategories: state => {
       return state.categories
     },
-    getID: state => {
-      return state.currentRestaurant._id
-    }
   },
   mutations: {
     SET_RESTAURANTS: (state, restaurants) => {

@@ -45,7 +45,6 @@ export default Vue.extend({
     return {
       valid: true,
       loader: false,
-      error: "",
       model: {
         email: "",
         password: "",
@@ -69,7 +68,7 @@ export default Vue.extend({
       },
     };
   },
-  name: "Home",
+  name: "Login",
   methods: {
     validate() {
       if (this.$refs.loginForm.validate())
@@ -78,6 +77,7 @@ export default Vue.extend({
           .then(() => (this.loader = true))
           .catch((err) => {
             this.$store.dispatch("setAlert", {
+              type:'error',
               alert: err.response.data.details.message,
             });
           })

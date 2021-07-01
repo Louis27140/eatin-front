@@ -7,6 +7,7 @@ const getDefaultState = () => {
     jwtToken: '',
     refreshToken: '',
     infos: {},
+    currentRestaurantId: ''
   }
 }
 
@@ -24,6 +25,9 @@ const authModule: Module<any, any> = {
       },
     getInfos: state => {
         return state.infos;
+    },
+    getRestID: state => {
+      return state.currentRestaurantId
     }
   },
   mutations: {
@@ -31,6 +35,9 @@ const authModule: Module<any, any> = {
         state.jwtToken = data.jwtToken
         state.refreshToken = data.refreshToken
         state.infos = data.infos
+    },
+    SET_REST_ID: (state, id) => {
+      state.currentRestaurantId = id
     },
     RESET: state => {
       Object.assign(state, getDefaultState());
@@ -68,6 +75,9 @@ const authModule: Module<any, any> = {
     },
     logout: ({ commit, dispatch }) => {
       commit('RESET', '');
+    },
+    setRestaurantId: ({commit}, {id}) => {
+      commit('SET_REST_ID', id)
     }
   }
 }

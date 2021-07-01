@@ -2,8 +2,8 @@
   <v-app>
     <navbar :isLoggedIn="isloggedIn" :initials="initials"></navbar>
     <v-main>
-      <alert :error="msg"></alert>
-      <router-view />
+      <alert :type="type" :error="msg"></alert>
+      <router-view/>
     </v-main>
     <foot :buttons="buttons"></foot>
     <cookie-law></cookie-law>
@@ -16,7 +16,6 @@ import Vue from "vue";
 import Alert from "./components/layouts/Alert.vue";
 import Footer from "./components/layouts/Footer.vue";
 import NavBar from "./components/layouts/NavBar.vue";
-
 
 import CookieLaw from "vue-cookie-law";
 
@@ -37,6 +36,7 @@ export default Vue.extend({
     'navbar': NavBar,
     'foot': Footer,
     'alert': Alert,
+    CookieLaw,
   },
   computed: {
     isloggedIn() {
@@ -47,6 +47,9 @@ export default Vue.extend({
     },
     msg() {
       return this.$store.getters.getMsg;
+    },
+    type() {
+      return this.$store.getters.getType
     },
     cart() {
       return this.$store.getters.getCart

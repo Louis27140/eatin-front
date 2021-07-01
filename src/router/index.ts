@@ -9,13 +9,12 @@ import Login from "../views/Authentication/Login.vue";
 import Signup from "../views/Authentication/Signup.vue";
 import Profile from "../views/Authentication/Profile.vue";
 import Monitoring from "../views/monitoring/Monitoring.vue";
-import Home from '../views/Home.vue'
-import Login from '../views/Authentication/Login.vue'
-import Signup from '../views/Authentication/Signup.vue'
-import Profile from '../views/Authentication/Profile.vue'
+
 import Cart from '../views/Checkout.vue'
 
 import RestaurantPage from "../components/routes/RestaurantPage.vue";
+
+import OrderHistory from '../views/orders/History.vue'
 
 Vue.use(VueRouter);
 
@@ -59,9 +58,9 @@ const routes: Array<RouteConfig> = [
     },
   },
   {
-    path: "/orders",
-    name: "Orders",
-    redirect: "/",
+    path: '/orders',
+    name: 'Orders',
+    component: OrderHistory,
     meta: {
       requiresAuth: true,
     },
@@ -76,10 +75,6 @@ const routes: Array<RouteConfig> = [
     },
   },
   {
-    path: "*",
-    redirect: "/",
-  },
-];
     path: '/cart',
     name: 'Cart',
     component: Cart,
@@ -88,8 +83,8 @@ const routes: Array<RouteConfig> = [
     }
   },
   {
-    path: '*',
-    redirect: '/'
+    path: "*",
+    redirect: "/",
   }
 ]
 

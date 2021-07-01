@@ -37,7 +37,8 @@ export default Vue.extend({
     restaurants() {
       return this.$store.getters.getRestaurants;
     },
-    async mounted() {
+  },
+    mounted() {
       /*const token = await this.$messaging.getToken({ vapidKey: 'BNiHc6Sox1vukTgBDzEZpCR0e6GlNVFyN5w-lfcF9WnLZ0nEwQfyKZqhfPpRbt6lGsJlC-kd9nHlW59ZFutPkV0' }).catch((err:any) => console.log(err))
       const data = {
       deviceId: token
@@ -62,13 +63,5 @@ export default Vue.extend({
       };
     });*/
 },
-    components: {
-      Restaurant,
-    },
-    computed: {
-      restaurants() {
-        return this.$store.getters.getRestaurants
-      }
-    }
-  })
+})
 </script>
