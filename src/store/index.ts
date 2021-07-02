@@ -8,6 +8,7 @@ import user from './modules/user';
 import alert from './modules/alert';
 import restaurant from './modules/restaurant';
 import order from './modules/order'
+import delivery from './modules/delivery'
 
 Vue.use(Vuex)
 
@@ -17,7 +18,8 @@ export default new Vuex.Store({
     user,
     alert, 
     restaurant,
-    order
+    order,
+    delivery
   },
   plugins: [createPersistedState({paths: ['auth', 'user'], storage: window.sessionStorage})],
 })

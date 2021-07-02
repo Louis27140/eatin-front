@@ -29,7 +29,7 @@ const alertModule: Module<any, any> = {
     },
     updateOrder: async ({ commit, dispatch }, {order, status}) => {
       order.status = status
-      await orderService.updateOrder(order._id,status).then(() => commit('SET_ORDER', order))
+      await orderService.updateOrder(order._id,status)
     },
     reset: async ({ commit, dispatch }) => {
       commit('RESET');

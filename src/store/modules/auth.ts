@@ -28,6 +28,9 @@ const authModule: Module<any, any> = {
     },
     getRestID: state => {
       return state.currentRestaurantId
+    },
+    getID: state => {
+      return state.infos.id
     }
   },
   mutations: {

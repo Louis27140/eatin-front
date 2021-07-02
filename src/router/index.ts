@@ -19,6 +19,8 @@ import RestaurantPage from "../components/routes/RestaurantPage.vue";
 
 import OrderHistory from '../views/orders/History.vue'
 
+import MyDeliveries from '../views/delivery/MyDeliveries.vue'
+
 Vue.use(VueRouter);
 
 const routes: Array<RouteConfig> = [
@@ -83,6 +85,15 @@ const routes: Array<RouteConfig> = [
     component: OrderHistory,
     meta: {
       requiresAuth: true,
+    },
+  },
+  {
+    path: '/my-deliveries',
+    name: 'MyDeliveries',
+    component: MyDeliveries,
+    meta: {
+      requiresAuth: true,
+      roles: ["DEL"],
     },
   },
   {
