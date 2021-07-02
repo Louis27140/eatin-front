@@ -67,6 +67,8 @@ export default Vue.extend({
     }
 },
 created() {
+    this.$store.dispatch('setRestaurant', {id:this.$store.getters.getRestID})
+
     this.$store.dispatch('setMenues')
     this.$store.dispatch('setArticles')
     this.$store.dispatch('setCategories')

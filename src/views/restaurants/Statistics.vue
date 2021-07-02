@@ -42,9 +42,9 @@ export default Vue.extend({
     };
   },
 
-  async created() {
-    await this.$store.dispatch("setSelfRestaurant");
-    await this.$store.dispatch("setStatistics");
+  created() {
+    this.$store.dispatch("setSelfRestaurant");
+    this.$store.dispatch("setStatistics");
 
     const statistics = this.$store.getters.getStatistics;
     this.options.xaxis.categories = statistics.map((stat) => stat._id);

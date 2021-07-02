@@ -23,7 +23,7 @@ export default {
     );
   },
   async getSelfRestaurant() {
-    return await axios.get("restaurant?profileId=" + store.getters.getUser._id);
+    return await axios.get("restaurant?profileId=" + store.getters.getID);
   },
   async updateRestaurant(restaurant) {
     return await axios.put("restaurant/" + store.getters.getRestID, restaurant);
