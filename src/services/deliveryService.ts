@@ -8,7 +8,7 @@ export default {
     async getMyDeliveries() {
         return await axios.get('delivery?userId=' + store.getters.getID)
     },
-    async updateDelivery(id, delivererId, status) {
-        return await axios.put('delivery/' + id, {delivererId:delivererId, status:status} )
+    async updateDelivery(id, status) {
+        return await axios.put('delivery/' + id, {status:status} )
     }
 }

@@ -55,7 +55,7 @@ const alertModule: Module<any, any> = {
     updateDelivery: async ({ commit, dispatch }, {delivery, status}) => {
         delivery.status = status
         delivery.delivererId = store.getters.getID
-        await deliveryService.updateDelivery(delivery._id,delivery.delivererId,status).then(() => {
+        await deliveryService.updateDelivery(delivery._id,status).then(() => {
             if (status == 'MOV') {
                 commit('ADD_TO_MY_DELIVERIES', delivery)
                 commit('REMOVE_FROM_AVAILABLE', delivery)

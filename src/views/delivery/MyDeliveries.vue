@@ -9,7 +9,7 @@
                     {{delivery.orderId}}
                     {{new Date(delivery.updated_at).toUTCString()}}
                     <v-chip :color="setChips(delivery.status)[1]" dense><v-icon>{{setChips(delivery.status)[0]}}</v-icon></v-chip>
-                    <v-btn color="success" icon  @click="setStatus(delivery, 'MOV')"><v-icon>mdi-check</v-icon></v-btn>
+                    <v-btn color="success" icon  @click="setStatus(delivery, 'MOV')" v-if="delivery.status == 'PEN'"><v-icon>mdi-check</v-icon></v-btn>
                   </v-container>
                   
               </v-expansion-panel-header>
@@ -30,7 +30,7 @@
                     {{delivery.orderId}}
                     {{new Date(delivery.updated_at).toUTCString()}}
                     <v-chip :color="setChips(delivery.status)[1]" dense><v-icon>{{setChips(delivery.status)[0]}}</v-icon></v-chip>
-                    <v-btn color="success" icon @click="setStatus(delivery, 'DEL')"><v-icon>mdi-check</v-icon></v-btn>
+                    <v-btn color="success" icon @click="setStatus(delivery, 'DEL')" v-if="delivery.status == 'MOV'"><v-icon>mdi-check</v-icon></v-btn>
                   </v-container>
                   
               </v-expansion-panel-header>
@@ -51,7 +51,7 @@ import Vue from 'vue'
 
 export default Vue.extend({
     name:"MyDeliveries",
-    created() {
+    mounted() {
         this.$store.dispatch('setAvailableDeliveries')
         this.$store.dispatch('setMyDeliveries')
     },

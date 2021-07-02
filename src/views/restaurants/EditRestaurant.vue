@@ -147,16 +147,15 @@ export default Vue.extend({
       },
     };
   },
+  created() {
+    this.$store.dispatch("setSelfRestaurant");
 
-  async created() {
-    await this.$store.dispatch("setSelfRestaurant");
     this.restaurant = this.$store.getters.getRestaurant;
 
-    await this.$store.dispatch("setCategories");
-    await this.$store.dispatch("setArticles");
-    await this.$store.dispatch("setMenues");
+    this.$store.dispatch("setCategories");
+    this.$store.dispatch("setArticles");
+    this.$store.dispatch("setMenues");
   },
-
   computed: {
     categories() {
       return this.$store.getters.getCategories;

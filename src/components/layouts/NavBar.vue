@@ -70,7 +70,7 @@
                         depressed
                         rounded
                         text
-                        to="/statitics"
+                        to="/statistics"
                         v-if="isRes"
                     >
                     Mes statistiques
