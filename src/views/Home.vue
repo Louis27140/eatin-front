@@ -1,7 +1,6 @@
 <template>
   <v-container width="75vw" absolute right>
-    
-    <v-spacer/>
+    <v-spacer />
     <h1>Restaurant</h1>
     <v-spacer></v-spacer>
     <v-row>
@@ -19,9 +18,9 @@
 </template>
 
 <script lang="ts">
-  //import AuthService from '@/services/AuthService'
-import Vue from 'vue'
-  import Restaurant from '../components/Restaurant.vue'
+//import AuthService from '@/services/AuthService'
+import Vue from "vue";
+import Restaurant from "../components/Restaurant.vue";
 
 export default Vue.extend({
   name: "Home",
@@ -37,8 +36,8 @@ export default Vue.extend({
       return this.$store.getters.getRestaurants;
     },
   },
-    async mounted() {
-      /*const token = await this.$messaging.getToken({ vapidKey: 'BNiHc6Sox1vukTgBDzEZpCR0e6GlNVFyN5w-lfcF9WnLZ0nEwQfyKZqhfPpRbt6lGsJlC-kd9nHlW59ZFutPkV0' }).catch((err:any) => console.log(err))
+  async mounted() {
+    /*const token = await this.$messaging.getToken({ vapidKey: 'BNiHc6Sox1vukTgBDzEZpCR0e6GlNVFyN5w-lfcF9WnLZ0nEwQfyKZqhfPpRbt6lGsJlC-kd9nHlW59ZFutPkV0' }).catch((err:any) => console.log(err))
       const data = {
       deviceId: token
        }
@@ -61,6 +60,6 @@ export default Vue.extend({
         console.log(event);
       };
     });*/
-    }
-})
+  },
+});
 </script>

@@ -72,7 +72,6 @@ export default {
   methods: {
     async save() {
       if (this.action == "update") {
-        console.log(this.menu);
         await this.$store.dispatch("updateMenu", { menu: this.menu });
       } else {
         await this.$store.dispatch("createMenu", { menu: this.menu });

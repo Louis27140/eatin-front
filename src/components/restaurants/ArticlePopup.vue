@@ -71,7 +71,6 @@ export default {
   methods: {
     async save() {
       if (this.action == "update") {
-        console.log(this.article);
         await this.$store.dispatch("updateArticle", { article: this.article });
       } else {
         await this.$store.dispatch("createArticle", { article: this.article });
