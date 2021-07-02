@@ -175,45 +175,54 @@ export default Vue.extend({
         if (step) this.step = step;
       }
     },
-    name: 'Signup',
+    name: "Signup",
     methods: {
       validateAuth(step) {
-        if(this.$refs.authForm.validate()) {
-          if (step) this.step = step
+        if (this.$refs.authForm.validate()) {
+          if (step) this.step = step;
         }
       },
       validateProfile() {
         if (this.$refs.profileForm.validate()) {
-          this.signup()
+          this.signup();
         }
       },
       signup() {
-        delete this.infos['passwordConfirmation']
-        console.log(this.infos)
-        this.$store.dispatch('signup', {infos:this.infos})
-        .then(() => this.loader = true).catch(err =>{ this.$store.dispatch('setAlert', {type:'error',alert:err.response.data.details.message})})
-        .finally(() => {
-          await this.$store.dispatch("profile");
-          this.loader = false;
+        delete this.infos["passwordConfirmation"];
+        console.log(this.infos);
+        this.$store
+          .dispatch("signup", { infos: this.infos })
+          .then(() => (this.loader = true))
+          .catch((err) => {
+            this.$store.dispatch("setAlert", {
+              type: "error",
+              alert: err.response.data.details.message,
+            });
+          })
+          .finally(async () => {
+            await this.$store.dispatch("profile");
+            this.loader = false;
 
-          this.$router.push("/");
-        });
-    },
-    log(val) {
-      let { on, key, obj, params } = val;
+            this.$router.push("/");
+          });
+      },
+      log(val) {
+        let { on, key, obj, params } = val;
 
-      if (
-        on === "click" &&
-        (key === "password" || key == "passwordConfirmation") &&
-        (params && params.tag) === "append"
-      ) {
-        // toggle visibility of password control
-        obj.schema.type === "password"
-          ? (obj.schema.appendIcon = "mdi-eye-off")
-          : (obj.schema.appendIcon = "mdi-eye");
-        obj.schema.type = obj.schema.type === "password" ? "text" : "password";
-      }
-      this.validateAuth();
+        if (
+          on === "click" &&
+          (key === "password" || key == "passwordConfirmation") &&
+          (params && params.tag) === "append"
+        ) {
+          // toggle visibility of password control
+          obj.schema.type === "password"
+            ? (obj.schema.appendIcon = "mdi-eye-off")
+            : (obj.schema.appendIcon = "mdi-eye");
+          obj.schema.type =
+            obj.schema.type === "password" ? "text" : "password";
+        }
+        this.validateAuth();
+      },
     },
   },
 });

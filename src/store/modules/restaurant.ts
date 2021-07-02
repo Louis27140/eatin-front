@@ -75,6 +75,7 @@ const restaurantModule: Module<any, any> = {
     setSelfRestaurant: async ({ commit }) => {
       const res = await restaurantService.getSelfRestaurant();
       commit("SET_RESTAURANT", res.data);
+      commit("SET_REST_ID", res.data._id);
     },
     setMenues: async ({ commit }) => {
       const res = await restaurantService.getMenues();
