@@ -27,7 +27,6 @@ export default Vue.extend({
   name: "Home",
 
   created() {
-    console.log(this.$store.getters.getInfos.role);
     this.$store.dispatch("setRestaurants");
   },
   components: {
