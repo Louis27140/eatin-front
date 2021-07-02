@@ -57,7 +57,10 @@ export default Vue.extend({
     },
     methods: {
         setStatus(delivery, status) {
-            this.$store.dispatch('updateDelivery', {delivery:delivery, status:status})
+            this.$store.dispatch('updateDelivery', {delivery:delivery, status:status}).then(() => {
+                this.$store.dispatch('setAvailableDeliveries')
+                this.$store.dispatch('setMyDeliveries')
+            })
         },
         setChips(status) {
             switch(status) {
